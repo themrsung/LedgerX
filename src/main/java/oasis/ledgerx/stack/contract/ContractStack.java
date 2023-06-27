@@ -1,4 +1,4 @@
-package oasis.ledgerx.inventory.contract;
+package oasis.ledgerx.stack.contract;
 
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.contract.Contract;

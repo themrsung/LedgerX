@@ -3,7 +3,7 @@ package oasis.ledgerx.legacy;
 import oasis.ledgerx.LedgerX;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.classes.Market;
-import oasis.ledgerx.inventory.contract.ContractStack;
+import oasis.ledgerx.stack.contract.ContractStack;
 import oasis.ledgerx.state.LedgerState;
 
 import javax.annotation.Nonnull;

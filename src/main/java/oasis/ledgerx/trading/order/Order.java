@@ -3,7 +3,7 @@ package oasis.ledgerx.trading.order;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.contract.Contract;
 import oasis.ledgerx.exception.IncompatibleOrderTypeException;
-import oasis.ledgerx.inventory.asset.CashStack;
+import oasis.ledgerx.stack.asset.CashStack;
 import oasis.ledgerx.state.LedgerState;
 import org.joda.time.DateTime;
 

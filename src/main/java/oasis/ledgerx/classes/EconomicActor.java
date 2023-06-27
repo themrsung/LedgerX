@@ -1,7 +1,7 @@
 package oasis.ledgerx.classes;
 
 import oasis.ledgerx.actor.Actor;
-import oasis.ledgerx.inventory.asset.AssetStack;
+import oasis.ledgerx.stack.asset.AssetStack;
 
 import java.util.ArrayList;
 import java.util.List;

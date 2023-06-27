@@ -5,17 +5,17 @@ import oasis.ledgerx.event.LedgerEvent;
 
 public final class OptionExercisedEvent extends LedgerEvent {
     public OptionExercisedEvent(
-            Option<?> option,
+            Option option,
             OptionExerciseCause cause
     ) {
         this.option = option;
         this.cause = cause;
     }
 
-    private final Option<?> option;
+    private final Option option;
     private final OptionExerciseCause cause;
 
-    public Option<?> getOption() {
+    public Option getOption() {
         return option;
     }
 

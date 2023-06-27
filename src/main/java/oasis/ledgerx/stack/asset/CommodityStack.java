@@ -1,5 +1,7 @@
-package oasis.ledgerx.inventory.asset;
+package oasis.ledgerx.stack.asset;
 
+import oasis.ledgerx.asset.commodity.Commodity;
+import oasis.ledgerx.asset.commodity.CommodityMeta;
 import oasis.ledgerx.asset.stock.Stock;
 import oasis.ledgerx.asset.stock.StockMeta;
 
@@ -7,27 +9,27 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
 /**
- * Stack of stocks
+ * Stack of commodities
  * Fungible and integral
  */
-public final class StockStack implements AssetStack {
-    public StockStack(Stock asset, @Nonnegative long quantity) {
+public final class CommodityStack implements AssetStack {
+    public CommodityStack(Commodity asset, @Nonnegative long quantity) {
         this.asset = asset;
         this.quantity = quantity;
     }
 
-    public StockStack(StockStack other) {
+    public CommodityStack(CommodityStack other) {
         this.asset = other.asset;
         this.quantity = other.quantity;
     }
 
-    private final Stock asset;
+    private final Commodity asset;
     private long quantity;
 
     @Nonnull
     @Override
-    public Stock getAsset() {
-        return new Stock(asset);
+    public Commodity getAsset() {
+        return new Commodity(asset);
     }
 
     /**
@@ -51,7 +53,7 @@ public final class StockStack implements AssetStack {
 
     @Nonnull
     @Override
-    public StockMeta getMeta() {
+    public CommodityMeta getMeta() {
         return getAsset().getMeta();
     }
 }

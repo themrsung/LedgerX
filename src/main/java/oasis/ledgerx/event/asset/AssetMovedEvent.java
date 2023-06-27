@@ -3,7 +3,7 @@ package oasis.ledgerx.event.asset;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.asset.AssetType;
 import oasis.ledgerx.event.LedgerEvent;
-import oasis.ledgerx.inventory.asset.AssetStack;
+import oasis.ledgerx.stack.asset.AssetStack;
 
 import javax.annotation.Nonnull;
 

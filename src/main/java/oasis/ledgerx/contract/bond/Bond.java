@@ -3,7 +3,7 @@ package oasis.ledgerx.contract.bond;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.contract.Contract;
 import oasis.ledgerx.contract.ContractType;
-import oasis.ledgerx.inventory.asset.CashStack;
+import oasis.ledgerx.stack.asset.CashStack;
 import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;

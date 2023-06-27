@@ -6,8 +6,8 @@ import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.contract.Contract;
 import oasis.ledgerx.contract.ContractType;
 import oasis.ledgerx.exception.DifferentCurrencyException;
-import oasis.ledgerx.inventory.asset.AssetStack;
-import oasis.ledgerx.inventory.asset.CashStack;
+import oasis.ledgerx.stack.asset.AssetStack;
+import oasis.ledgerx.stack.asset.CashStack;
 import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;
@@ -16,9 +16,8 @@ import javax.annotation.Nullable;
 /**
  * A unilateral contract which gives the owner only the right to exercise
  * Perpetual options are not supported
- * @param <A> Underlying asset
  */
-public final class Option<A extends Asset> implements Contract {
+public final class Option implements Contract {
     public Option(String symbol, Actor buyer, Actor seller, AssetStack delivery, @Nonnull DateTime expiry, OptionType optionType, PriceProvider market, CashStack exercisePrice) {
         this.symbol = symbol;
         this.buyer = buyer;
@@ -31,7 +30,7 @@ public final class Option<A extends Asset> implements Contract {
         this.exercisePrice = exercisePrice;
     }
 
-    public Option(Option<A> other) {
+    public Option(Option other) {
         this.symbol = other.symbol;
         this.buyer = other.buyer;
         this.seller = other.seller;

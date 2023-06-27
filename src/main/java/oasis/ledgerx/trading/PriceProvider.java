@@ -2,7 +2,7 @@ package oasis.ledgerx.trading;
 
 import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.asset.cash.Cash;
-import oasis.ledgerx.inventory.asset.CashStack;
+import oasis.ledgerx.stack.asset.CashStack;
 
 /**
  * An entity capable of providing fair prices to assets

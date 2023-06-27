@@ -1,4 +1,4 @@
-package oasis.ledgerx.inventory.asset;
+package oasis.ledgerx.stack.asset;
 
 import oasis.ledgerx.asset.cash.Cash;
 import oasis.ledgerx.asset.cash.CashMeta;

@@ -1,7 +1,7 @@
 package oasis.ledgerx.contract;
 
 import oasis.ledgerx.actor.Actor;
-import oasis.ledgerx.inventory.asset.AssetStack;
+import oasis.ledgerx.stack.asset.AssetStack;
 import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;

@@ -1,7 +1,7 @@
 package oasis.ledgerx.classes;
 
 import oasis.ledgerx.asset.Asset;
-import oasis.ledgerx.inventory.asset.CashStack;
+import oasis.ledgerx.stack.asset.CashStack;
 import oasis.ledgerx.state.LedgerState;
 import oasis.ledgerx.trading.market.MarketTick;
 import oasis.ledgerx.trading.market.Marketplace;
