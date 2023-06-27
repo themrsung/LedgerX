@@ -21,7 +21,7 @@ public final class OptionExerciser extends LedgerListener {
     public void onOptionExercised(OptionExercisedEvent e) {
         if (e.isCancelled()) return;
 
-        Option<?> option = e.getOption();
+        Option option = e.getOption();
 
         AssetStack delivery = option.getDelivery();
         CashStack settlement = option.getExercisePrice();

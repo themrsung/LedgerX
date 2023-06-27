@@ -3,9 +3,12 @@ package oasis.ledgerx.stack.contract;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.contract.Contract;
 import oasis.ledgerx.contract.ContractType;
+import oasis.ledgerx.stack.asset.AssetStack;
+import org.joda.time.DateTime;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface ContractStack {
     /**
@@ -13,6 +16,22 @@ public interface ContractStack {
      */
     @Nonnull
     Contract getContract();
+
+    /**
+     * Gets expiry of this contract
+     */
+    @Nullable
+    default DateTime getExpiry() {
+        return getContract().getExpiry();
+    }
+
+    /**
+     * Gets the delivery of this contract
+     */
+    @Nonnull
+    default AssetStack getDelivery() {
+        return getContract().getDelivery();
+    }
 
     /**
      * Gets the number of contracts this stack is holding
