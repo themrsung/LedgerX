@@ -1,7 +1,8 @@
 package oasis.ledgerx.inventory.contract;
 
-import oasis.ledgerx.contracts.Contract;
-import oasis.ledgerx.contracts.ContractType;
+import oasis.ledgerx.actor.Actor;
+import oasis.ledgerx.contract.Contract;
+import oasis.ledgerx.contract.ContractType;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -72,5 +73,21 @@ public interface ContractStack {
     @Nonnull
     default ContractType getContractType() {
         return getContract().getType();
+    }
+
+    /**
+     * Gets the buyer of this contract
+     */
+    @Nonnull
+    default Actor getBuyer() {
+        return getContract().getBuyer();
+    }
+
+    /**
+     * Gets the seller of this contract
+     */
+    @Nonnull
+    default Actor getSeller() {
+        return getContract().getSeller();
     }
 }

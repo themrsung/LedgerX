@@ -1,8 +1,8 @@
 package oasis.ledgerx.inventory.asset;
 
-import oasis.ledgerx.assets.Asset;
-import oasis.ledgerx.assets.AssetMeta;
-import oasis.ledgerx.assets.AssetType;
+import oasis.ledgerx.asset.Asset;
+import oasis.ledgerx.asset.AssetMeta;
+import oasis.ledgerx.asset.AssetType;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;

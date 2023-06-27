@@ -1,7 +1,7 @@
 package oasis.ledgerx.inventory.asset;
 
-import oasis.ledgerx.assets.stock.Stock;
-import oasis.ledgerx.assets.stock.StockMeta;
+import oasis.ledgerx.asset.stock.Stock;
+import oasis.ledgerx.asset.stock.StockMeta;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
