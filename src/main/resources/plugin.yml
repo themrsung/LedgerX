@@ -1,0 +1,4 @@
+name: LedgerX
+version: '${project.version}'
+main: oasis.ledgerx.LedgerX
+api-version: '1.20'
