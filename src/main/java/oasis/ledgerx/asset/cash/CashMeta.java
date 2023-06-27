@@ -3,8 +3,9 @@ package oasis.ledgerx.asset.cash;
 import oasis.ledgerx.asset.AssetMeta;
 
 import javax.annotation.Nonnegative;
+import java.io.Serializable;
 
-public final class CashMeta implements AssetMeta {
+public final class CashMeta implements AssetMeta, Serializable {
     public CashMeta() {
         this.fractionQuantity = 0d;
     }

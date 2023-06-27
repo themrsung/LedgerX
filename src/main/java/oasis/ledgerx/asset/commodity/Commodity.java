@@ -5,12 +5,13 @@ import oasis.ledgerx.asset.AssetMeta;
 import oasis.ledgerx.asset.AssetType;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
 /**
  * Commodity
  * A fungible and integral asset
  */
-public final class Commodity implements Asset {
+public final class Commodity implements Asset, Serializable {
     public Commodity(@Nonnull String symbol, @Nonnull CommodityMeta meta) {
         this.symbol = symbol;
         this.meta = meta;

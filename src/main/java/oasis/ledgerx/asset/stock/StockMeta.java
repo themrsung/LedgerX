@@ -4,13 +4,14 @@ import oasis.ledgerx.asset.AssetMeta;
 import oasis.ledgerx.asset.cash.Cash;
 
 import javax.annotation.Nullable;
+import java.io.Serializable;
 
-public final class StockMeta implements AssetMeta {
+public final class StockMeta implements AssetMeta, Serializable {
     public StockMeta() {
         this.purchasePrice = null;
     }
 
-    public StockMeta(Cash purchasePrice) {
+    public StockMeta(@Nullable Cash purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 

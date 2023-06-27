@@ -1,8 +1,11 @@
 package oasis.ledgerx.stack.asset;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.asset.AssetMeta;
 import oasis.ledgerx.asset.AssetType;
+import oasis.ledgerx.asset.commodity.Commodity;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;

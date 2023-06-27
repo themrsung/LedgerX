@@ -5,11 +5,12 @@ import oasis.ledgerx.asset.AssetMeta;
 import oasis.ledgerx.asset.AssetType;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
 /**
  * A fungible, fractional, and liquid asset
  */
-public final class Cash implements Asset {
+public final class Cash implements Asset, Serializable {
     public Cash(@Nonnull String symbol, @Nonnull CashMeta meta) {
         this.symbol = symbol;
         this.meta = meta;

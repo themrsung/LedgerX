@@ -5,12 +5,13 @@ import oasis.ledgerx.asset.AssetMeta;
 import oasis.ledgerx.asset.AssetType;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
 /**
  * Stocks
  * A fungible and integral asset
  */
-public final class Stock implements Asset {
+public final class Stock implements Asset, Serializable {
     public Stock(@Nonnull String symbol, @Nonnull StockMeta meta) {
         this.symbol = symbol;
         this.meta = meta;
@@ -38,7 +39,7 @@ public final class Stock implements Asset {
     @Nonnull
     @Override
     public AssetType getType() {
-        return AssetType.COMMODITY;
+        return AssetType.STOCK;
     }
 
     /**

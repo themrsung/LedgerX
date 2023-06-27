@@ -4,8 +4,9 @@ import oasis.ledgerx.contract.bond.Bond;
 import oasis.ledgerx.contract.futures.Futures;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
-public final class FuturesStack implements ContractStack {
+public final class FuturesStack implements ContractStack, Serializable {
     public FuturesStack(Futures contract, long quantity) {
         this.contract = contract;
         this.quantity = quantity;

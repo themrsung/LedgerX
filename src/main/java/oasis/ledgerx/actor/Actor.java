@@ -1,11 +1,16 @@
 package oasis.ledgerx.actor;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import oasis.ledgerx.classes.EconomicActor;
 import oasis.ledgerx.stack.asset.AssetStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * An entity capable of holding assets and participating in economic events
+ */
 public interface Actor {
     /**
      * Gets the unique ID of this actor

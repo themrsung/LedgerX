@@ -5,12 +5,13 @@ import oasis.ledgerx.asset.cash.CashMeta;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
 /**
  * Stack of cash
  * Fungible and fractional
  */
-public final class CashStack implements AssetStack {
+public final class CashStack implements AssetStack, Serializable {
     public CashStack(Cash asset, @Nonnegative double quantity) {
         this.asset = asset;
         this.setQuantity(quantity);

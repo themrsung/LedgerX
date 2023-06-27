@@ -20,7 +20,15 @@ public interface LedgerState {
     /**
      * Gets a specific actor
      */
-    @Nullable Actor getActor(UUID uniqueId);
+    default @Nullable Actor getActor(UUID uniqueId) {
+        for (Actor a : getActors()) {
+            if (a.getUniqueId().equals(uniqueId)) {
+                return a;
+            }
+        }
+
+        return null;
+    }
 
     /**
      * Adds an actor to the state

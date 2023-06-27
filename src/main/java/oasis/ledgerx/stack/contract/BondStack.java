@@ -3,8 +3,9 @@ package oasis.ledgerx.stack.contract;
 import oasis.ledgerx.contract.bond.Bond;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
-public final class BondStack implements ContractStack {
+public final class BondStack implements ContractStack, Serializable {
     public BondStack(Bond contract, long quantity) {
         this.contract = contract;
         this.quantity = quantity;

@@ -9,10 +9,21 @@ import oasis.ledgerx.trading.order.Order;
 import oasis.ledgerx.trading.order.OrderType;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Market implements Marketplace {
+/**
+ * Class of Marketplace
+ */
+public final class Market implements Marketplace, Serializable {
+    public Market(List<Order> orders, Asset asset, double tickSize, CashStack price) {
+        this.orders = orders;
+        this.asset = asset;
+        this.tickSize = tickSize;
+        this.price = price;
+    }
+
     public Market(Market other) {
         this.orders = other.orders;
         this.asset = other.asset;

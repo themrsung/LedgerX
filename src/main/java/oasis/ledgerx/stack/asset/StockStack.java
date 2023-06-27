@@ -5,12 +5,13 @@ import oasis.ledgerx.asset.stock.StockMeta;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
 /**
  * Stack of stocks
  * Fungible and integral
  */
-public final class StockStack implements AssetStack {
+public final class StockStack implements AssetStack, Serializable {
     public StockStack(Stock asset, @Nonnegative long quantity) {
         this.asset = asset;
         this.quantity = quantity;

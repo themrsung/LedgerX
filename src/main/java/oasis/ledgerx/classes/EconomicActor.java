@@ -3,14 +3,28 @@ package oasis.ledgerx.classes;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.stack.asset.AssetStack;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class EconomicActor implements Actor {
+/**
+ * Class of Actor
+ */
+public final class EconomicActor implements Actor, Serializable {
     public EconomicActor() {
         this.uniqueId = UUID.randomUUID();
         this.assets = new ArrayList<>();
+    }
+
+    public EconomicActor(UUID uniqueId, List<AssetStack> assets) {
+        this.uniqueId = uniqueId;
+        this.assets = assets;
+    }
+
+    public EconomicActor(EconomicActor other) {
+        this.uniqueId = other.uniqueId;
+        this.assets = other.assets;
     }
 
     private final UUID uniqueId;
@@ -43,8 +57,13 @@ public class EconomicActor implements Actor {
         for (AssetStack stack : getAssets()) {
             if (stack.getSymbol().equalsIgnoreCase(asset.getSymbol())) {
                 stack.removeQuantity(asset.getQuantity());
+                cleanAssets();
                 return;
             }
         }
+    }
+
+    private void cleanAssets() {
+        assets.removeIf(a -> a.getQuantity() == 0);
     }
 }
