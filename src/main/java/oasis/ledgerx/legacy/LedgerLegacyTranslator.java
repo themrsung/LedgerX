@@ -2,6 +2,7 @@ package oasis.ledgerx.legacy;
 
 import oasis.ledgerx.LedgerX;
 import oasis.ledgerx.actor.Actor;
+import oasis.ledgerx.classes.Market;
 import oasis.ledgerx.inventory.contract.ContractStack;
 import oasis.ledgerx.state.LedgerState;
 
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * An interface for translating LedgerX data into Ledger data and vice versa
  * Can be ignored if you are not migrating from jbs.ledger.Ledger
+ * All methods are prefixed with LX or suffixed with X
  */
 public interface LedgerLegacyTranslator {
     /**
@@ -24,6 +26,7 @@ public interface LedgerLegacyTranslator {
         return getLedgerX().getState();
     }
 
+
     default List<Actor> getLXActors() {
         return getLXState().getActors();
     }
@@ -36,6 +39,7 @@ public interface LedgerLegacyTranslator {
         getLXState().removeActor(actor);
     }
 
+
     default List<ContractStack> getLXContracts() {
         return getLXState().getContracts();
     }
@@ -46,6 +50,19 @@ public interface LedgerLegacyTranslator {
 
     default void removeLXContract(ContractStack contract) {
         getLXState().removeContract(contract);
+    }
+
+
+    default List<Market> getLXMarkets() {
+        return getLXState().getMarkets();
+    }
+
+    default void addLXMarket(Market market) {
+        getLXState().addMarket(market);
+    }
+
+    default void removeLXMarket(Market market) {
+        getLXState().removeMarket(market);
     }
 
 }

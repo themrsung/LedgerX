@@ -1,6 +1,7 @@
-package oasis.ledgerx.market;
+package oasis.ledgerx.trading;
 
 import oasis.ledgerx.asset.Asset;
+import oasis.ledgerx.asset.cash.Cash;
 import oasis.ledgerx.inventory.asset.CashStack;
 
 /**
@@ -18,4 +19,11 @@ public interface PriceProvider {
      * Returns 0 if no trades were ever made
      */
     CashStack getPrice();
+
+    /**
+     * Gets the currency of this market
+     */
+    default Cash getCurrency() {
+        return getPrice().getAsset();
+    }
 }

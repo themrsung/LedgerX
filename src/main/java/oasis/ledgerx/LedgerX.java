@@ -3,6 +3,8 @@ package oasis.ledgerx;
 import oasis.ledgerx.listener.asset.AssetTransferHandler;
 import oasis.ledgerx.listener.contract.OptionExerciser;
 import oasis.ledgerx.state.LedgerState;
+import oasis.ledgerx.timer.market.MarketTimer;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LedgerX extends JavaPlugin {
@@ -22,6 +24,8 @@ public final class LedgerX extends JavaPlugin {
     public void onEnable() {
         new AssetTransferHandler(this);
         new OptionExerciser(this);
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new MarketTimer(this), 0, 4);
     }
 
     @Override

@@ -2,11 +2,11 @@ package oasis.ledgerx.classes;
 
 import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.inventory.asset.CashStack;
-import oasis.ledgerx.market.Marketplace;
-import oasis.ledgerx.market.order.Order;
-import oasis.ledgerx.market.order.OrderType;
 import oasis.ledgerx.state.LedgerState;
-import org.joda.time.DateTime;
+import oasis.ledgerx.trading.market.MarketTick;
+import oasis.ledgerx.trading.market.Marketplace;
+import oasis.ledgerx.trading.order.Order;
+import oasis.ledgerx.trading.order.OrderType;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -16,12 +16,19 @@ public abstract class Market implements Marketplace {
     public Market(Market other) {
         this.orders = other.orders;
         this.asset = other.asset;
+        this.tickSize = other.tickSize;
         this.price = other.price;
     }
 
     private final List<Order> orders;
     private final Asset asset;
+    private final double tickSize;
     private CashStack price;
+
+    @Override
+    public double getTickSize() {
+        return tickSize;
+    }
 
     @Override
     public List<Order> getOrders() {
@@ -40,7 +47,18 @@ public abstract class Market implements Marketplace {
         orders.remove(order);
     }
 
-    // Cleans orders with 0 quantity
+    // Cancels orders non-compliant with tick size
+    private void enforceTickSize(LedgerState state) {
+        for (Order o : getOrders()) {
+            double price = o.getPrice().getQuantity();
+
+            if (price % getTickSize() != 0d) {
+                cancelOrder(o, state);
+            }
+        }
+    }
+
+    // Cleans fulfilled orders
     private void cleanFulfilledOrders(LedgerState state) {
         for (Order o : getOrders()) {
             if (o.getQuantity() <= 0L) {
@@ -49,6 +67,7 @@ public abstract class Market implements Marketplace {
         }
     }
 
+    // Triggers stop-loss
     private void triggerStopLoss() {
         for (Order o : getOrders()) {
             if (o.getOrderType() == OrderType.STOP_LOSS_SELL) {
@@ -69,6 +88,7 @@ public abstract class Market implements Marketplace {
         }
     }
 
+    // Triggers stop-limit
     private void triggerStopLimit() {
         for (Order o : getOrders()) {
             if (o.getOrderType() == OrderType.STOP_LIMIT_SELL) {
@@ -89,12 +109,36 @@ public abstract class Market implements Marketplace {
         }
     }
 
+    // Kills unfulfilled immediate orders
     private void killImmediateOrders(LedgerState state) {
         for (Order o : getOrders()) {
-            if (o.getOrderType() == OrderType.IMMEDIATE_OR_CANCEL_BUY || o.getOrderType() == OrderType.IMMEDIATE_OR_CANCEL_SELL || o.getOrderType() == OrderType.FILL_OR_KILL_BUY || o.getOrderType() == OrderType.FILL_OR_KILL_SELL) {
+            if (o.isImmediate()) {
                 if (o.getTime().plusSeconds(1).isBeforeNow()) {
                     cancelOrder(o, state);
                 }
+            }
+        }
+    }
+
+    // Reprices market orders to be processed first
+    private void repriceMarketOrders() {
+        MarketTick highestAsk = getHighestAsk();
+        double askPrice = highestAsk != null ? highestAsk.getPrice() : Double.MAX_VALUE;
+        CashStack buyMarketPrice = new CashStack(getCurrency(), askPrice);
+
+        for (Order o : getBuyOrders()) {
+            if (o.isMarket()) {
+                o.setPrice(buyMarketPrice);
+            }
+        }
+
+        MarketTick lowestBid = getLowestBid();
+        double bidPrice = lowestBid != null ? lowestBid.getPrice() : 0d;
+        CashStack sellMarketPrice = new CashStack(getCurrency(), bidPrice);
+
+        for (Order o : getSellOrders()) {
+            if (o.isMarket()) {
+                o.setPrice(sellMarketPrice);
             }
         }
     }
@@ -129,6 +173,35 @@ public abstract class Market implements Marketplace {
 
     @Override
     public void processOrders(LedgerState state) {
+        enforceTickSize(state);
+
+        cleanFulfilledOrders(state);
+
+        triggerStopLoss();
+        triggerStopLimit();
+
+        killImmediateOrders(state);
+
+        repriceMarketOrders();
+
+        for (Order bo : getBuyOrders()) {
+            for (Order so : getSellOrders()) {
+                if (bo.getPrice().getQuantity() >= so.getPrice().getQuantity()) {
+                    // Prices match
+                    CashStack p = bo.getTime().isBefore(so.getTime()) ? bo.getPrice() : so.getPrice();
+                    long q = Math.min(bo.getQuantity(), so.getQuantity());
+
+                    if (q == bo.getQuantity() || bo.allowsPartialFulfillment()) {
+                        if (q == so.getQuantity() || so.allowsPartialFulfillment()) {
+                            bo.onFulfilled(state, p, q);
+                            so.onFulfilled(state, p, q);
+
+                            price = p;
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
@@ -139,6 +212,6 @@ public abstract class Market implements Marketplace {
 
     @Override
     public CashStack getPrice() {
-        return null;
+        return new CashStack(price);
     }
 }

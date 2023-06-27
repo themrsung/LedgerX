@@ -1,7 +1,7 @@
 package oasis.ledgerx.contract.option;
 
 import oasis.ledgerx.actor.Actor;
-import oasis.ledgerx.market.PriceProvider;
+import oasis.ledgerx.trading.PriceProvider;
 import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.contract.Contract;
 import oasis.ledgerx.contract.ContractType;

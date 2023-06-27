@@ -2,6 +2,7 @@ package oasis.ledgerx.state;
 
 
 import oasis.ledgerx.actor.Actor;
+import oasis.ledgerx.classes.Market;
 import oasis.ledgerx.inventory.contract.ContractStack;
 
 import javax.annotation.Nullable;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface LedgerState {
+    // ACTORS
+
     /**
      * Gets every actor in existence
      */
@@ -29,6 +32,8 @@ public interface LedgerState {
      */
     void removeActor(Actor actor);
 
+    // CONTRACTS
+
     /**
      * Gets all contracts in existence
      */
@@ -43,4 +48,21 @@ public interface LedgerState {
      * Removes a contract
      */
     void removeContract(ContractStack contract);
+
+    // MARKETS
+
+    /**
+     * Gets all markets in existence
+     */
+    List<Market> getMarkets();
+
+    /**
+     * Adds a market
+     */
+    void addMarket(Market market);
+
+    /**
+     * Removes a market
+     */
+    void removeMarket(Market market);
 }

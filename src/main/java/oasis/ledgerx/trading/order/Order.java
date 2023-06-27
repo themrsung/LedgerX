@@ -1,4 +1,4 @@
-package oasis.ledgerx.market.order;
+package oasis.ledgerx.trading.order;
 
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.contract.Contract;
@@ -13,7 +13,8 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 /**
- *
+ * An order placed for an asset
+ * Supports every asset and all order types
  */
 public interface Order {
     /**
@@ -46,6 +47,27 @@ public interface Order {
     }
 
     /**
+     * Whether this is a market order or not
+     */
+    default boolean isMarket() {
+        return getOrderType().isMarket();
+    }
+
+    /**
+     * Whether order is immediate or not
+     */
+    default boolean isImmediate() {
+        return getOrderType().isImmediate();
+    }
+
+    /**
+     * Whether order allows partial fulfillment
+     */
+    default boolean allowsPartialFulfillment() {
+        return getOrderType().allowsPartialFulfillment();
+    }
+
+    /**
      * Gets the time of order creation
      */
     DateTime getTime();
@@ -55,6 +77,11 @@ public interface Order {
      */
     @Nonnull
     CashStack getPrice();
+
+    /**
+     * Changes the price of this order
+     */
+    void setPrice(@Nonnull CashStack price);
 
     /**
      * Gets the quantity of this order
