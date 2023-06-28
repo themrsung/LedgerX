@@ -1,8 +1,8 @@
 package oasis.ledgerx.asset.cash;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.asset.AssetMeta;
-import oasis.ledgerx.asset.AssetType;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
@@ -21,8 +21,16 @@ public final class Cash implements Asset, Serializable {
         this.meta = other.meta;
     }
 
+    public Cash() {
+        this.symbol = "";
+        this.meta = new CashMeta();
+    }
+
+    @JsonProperty("symbol")
     @Nonnull
     private final String symbol;
+
+    @JsonProperty("meta")
     @Nonnull
     private CashMeta meta;
 
@@ -33,15 +41,6 @@ public final class Cash implements Asset, Serializable {
     @Override
     public String getSymbol() {
         return symbol;
-    }
-
-    /**
-     * @return Cash
-     */
-    @Nonnull
-    @Override
-    public AssetType getType() {
-        return AssetType.CASH;
     }
 
     /**

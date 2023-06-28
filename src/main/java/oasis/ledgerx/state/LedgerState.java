@@ -73,4 +73,9 @@ public interface LedgerState {
      * Removes a market
      */
     void removeMarket(Market market);
+
+    /**
+     * Saves the state
+     */
+    void save();
 }

@@ -1,6 +1,8 @@
 package oasis.ledgerx.actor;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import oasis.ledgerx.classes.EconomicActor;
 import oasis.ledgerx.stack.asset.AssetStack;
 
@@ -11,15 +13,21 @@ import java.util.UUID;
 /**
  * An entity capable of holding assets and participating in economic events
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = EconomicActor.class)
+})
 public interface Actor {
     /**
      * Gets the unique ID of this actor
      */
+    @JsonProperty("uniqueId")
     UUID getUniqueId();
 
     /**
      * Gets a copied list of every asset this actor owns
      */
+    @JsonProperty("assets")
     List<AssetStack> getAssets();
 
     /**

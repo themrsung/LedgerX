@@ -1,8 +1,11 @@
 package oasis.ledgerx.asset.cash;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import oasis.ledgerx.asset.AssetMeta;
+import oasis.ledgerx.asset.AssetType;
 
 import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
 import java.io.Serializable;
 
 public final class CashMeta implements AssetMeta, Serializable {
@@ -18,6 +21,7 @@ public final class CashMeta implements AssetMeta, Serializable {
         this.fractionQuantity = other.fractionQuantity;
     }
 
+    @JsonProperty("fractionalQuantity")
     @Nonnegative
     private double fractionQuantity;
 
@@ -35,5 +39,11 @@ public final class CashMeta implements AssetMeta, Serializable {
     public void setFractionQuantity(@Nonnegative double fractionQuantity) throws IllegalArgumentException {
         if (fractionQuantity <= 0d) throw new IllegalArgumentException();
         this.fractionQuantity = fractionQuantity;
+    }
+
+    @Nonnull
+    @Override
+    public AssetType getType() {
+        return AssetType.CASH;
     }
 }

@@ -7,7 +7,7 @@ import oasis.ledgerx.classes.EconomicActor;
 import oasis.ledgerx.listener.asset.AssetTransferHandler;
 import oasis.ledgerx.listener.contract.OptionExerciser;
 import oasis.ledgerx.stack.asset.StockStack;
-import oasis.ledgerx.state.LedgerRunState;
+import oasis.ledgerx.state.LedgerXState;
 import oasis.ledgerx.state.LedgerState;
 import oasis.ledgerx.timer.contract.ContractExpirationEnforcer;
 import oasis.ledgerx.timer.io.LedgerAutoSaver;
@@ -30,12 +30,7 @@ public final class LedgerX extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        LedgerSaveState save = LedgerSaveState.load();
-        if (save != null) {
-            this.state = new LedgerRunState(save);
-        } else {
-            this.state = new LedgerRunState();
-        }
+        this.state = LedgerXState.load();
 
         Actor a = new EconomicActor();
         getState().addActor(a);
@@ -55,6 +50,8 @@ public final class LedgerX extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        getState().save();
+
         Bukkit.getLogger().info("[LedgerX] Shutting down.");
     }
 }

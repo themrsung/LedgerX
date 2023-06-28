@@ -22,6 +22,11 @@ public final class Stock implements Asset, Serializable {
         this.meta = other.meta;
     }
 
+    public Stock() {
+        this.symbol = "";
+        this.meta = new StockMeta();
+    }
+
     @Nonnull
     private final String symbol;
     @Nonnull
@@ -31,15 +36,6 @@ public final class Stock implements Asset, Serializable {
     @Override
     public String getSymbol() {
         return symbol;
-    }
-
-    /**
-     * @return Stock
-     */
-    @Nonnull
-    @Override
-    public AssetType getType() {
-        return AssetType.STOCK;
     }
 
     /**

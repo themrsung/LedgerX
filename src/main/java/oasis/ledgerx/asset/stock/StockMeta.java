@@ -1,8 +1,10 @@
 package oasis.ledgerx.asset.stock;
 
 import oasis.ledgerx.asset.AssetMeta;
+import oasis.ledgerx.asset.AssetType;
 import oasis.ledgerx.asset.cash.Cash;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 
@@ -39,5 +41,11 @@ public final class StockMeta implements AssetMeta, Serializable {
     @Override
     public double getFractionalQuantity() {
         return 0;
+    }
+
+    @Nonnull
+    @Override
+    public AssetType getType() {
+        return AssetType.STOCK;
     }
 }
