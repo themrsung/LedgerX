@@ -1,5 +1,7 @@
 package oasis.ledgerx.stack.asset;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import oasis.ledgerx.asset.commodity.Commodity;
 import oasis.ledgerx.asset.stock.Stock;
 import oasis.ledgerx.asset.stock.StockMeta;
 
@@ -12,6 +14,10 @@ import java.io.Serializable;
  * Fungible and integral
  */
 public final class StockStack implements AssetStack, Serializable {
+    public StockStack() {
+        this.asset = new Stock();
+        this.quantity = 0;
+    }
     public StockStack(Stock asset, @Nonnegative long quantity) {
         this.asset = asset;
         this.quantity = quantity;
@@ -23,6 +29,7 @@ public final class StockStack implements AssetStack, Serializable {
     }
 
     private final Stock asset;
+    @JsonProperty("integralQuantity")
     private long quantity;
 
     @Nonnull

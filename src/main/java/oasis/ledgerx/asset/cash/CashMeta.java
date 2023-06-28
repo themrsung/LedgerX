@@ -21,7 +21,6 @@ public final class CashMeta implements AssetMeta, Serializable {
         this.fractionQuantity = other.fractionQuantity;
     }
 
-    @JsonProperty("fractionalQuantity")
     @Nonnegative
     private double fractionQuantity;
 
@@ -43,6 +42,7 @@ public final class CashMeta implements AssetMeta, Serializable {
 
     @Nonnull
     @Override
+    @JsonProperty("type")
     public AssetType getType() {
         return AssetType.CASH;
     }

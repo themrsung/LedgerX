@@ -1,5 +1,6 @@
 package oasis.ledgerx.asset.stock;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import oasis.ledgerx.asset.AssetMeta;
 import oasis.ledgerx.asset.AssetType;
 import oasis.ledgerx.asset.cash.Cash;

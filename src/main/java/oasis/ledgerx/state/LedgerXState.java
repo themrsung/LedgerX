@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.classes.Market;
 import oasis.ledgerx.stack.contract.ContractStack;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.util.FileUtil;
 
@@ -179,7 +180,13 @@ public final class LedgerXState implements LedgerState {
 
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
-        if (actorsFolder.mkdirs()) {
+        if (!actorsFolder.mkdirs() && !actorsFolder.exists()) {
+            Bukkit.getLogger().info("[LedgerX] Error creating actors directory.");
+        }
+
+        try {
+            FileUtils.cleanDirectory(actorsFolder);
+
             for (Actor actor : getActors()) {
                 File f = new File(SAVE_PATH + "/actors/" + actor.getUniqueId() + ".yml");
                 try {
@@ -188,11 +195,17 @@ public final class LedgerXState implements LedgerState {
                     Bukkit.getLogger().info("[LedgerX] Error saving file: " + e.getMessage());
                 }
             }
-        } else {
-            Bukkit.getLogger().info("[LedgerX] Error creating actors directory,");
+        } catch (IOException e) {
+            Bukkit.getLogger().info("[LedgerX] Error cleaning actors directory.");
         }
 
-        if (contractsFolder.mkdirs()) {
+        if (!contractsFolder.mkdirs() && !contractsFolder.exists()) {
+            Bukkit.getLogger().info("[LedgerX] Error creating contracts directory.");
+        }
+
+        try {
+            FileUtils.cleanDirectory(contractsFolder);
+
             for (ContractStack contract : getContracts()) {
                 File f = new File(SAVE_PATH + "/contracts/" + UUID.randomUUID() + ".yml");
                 try {
@@ -201,11 +214,17 @@ public final class LedgerXState implements LedgerState {
                     Bukkit.getLogger().info("[LedgerX] Error saving file: " + e.getMessage());
                 }
             }
-        } else {
-            Bukkit.getLogger().info("[LedgerX] Error creating actors directory,");
+        } catch (IOException e) {
+            Bukkit.getLogger().info("[LedgerX] Error cleaning contracts directory.");
         }
 
-        if (marketsFolder.mkdirs()) {
+        if (!marketsFolder.mkdirs() && !marketsFolder.exists()) {
+            Bukkit.getLogger().info("[LedgerX] Error creating markets directory.");
+        }
+
+        try {
+            FileUtils.cleanDirectory(marketsFolder);
+
             for (Market market : getMarkets()) {
                 File f = new File(SAVE_PATH + "/markets/" + UUID.randomUUID() + ".yml");
                 try {
@@ -214,9 +233,9 @@ public final class LedgerXState implements LedgerState {
                     Bukkit.getLogger().info("[LedgerX] Error saving file: " + e.getMessage());
                 }
             }
-        } else {
-            Bukkit.getLogger().info("[LedgerX] Error creating actors directory,");
-        }
+        } catch (IOException e) {
+            Bukkit.getLogger().info("[LedgerX] Error cleaning markets directory.");
+            }
 
         Bukkit.getLogger().info("[LedgerX] Data saved.");
     }

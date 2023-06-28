@@ -12,6 +12,10 @@ import java.io.Serializable;
  * Fungible and fractional
  */
 public final class CashStack implements AssetStack, Serializable {
+    public CashStack() {
+        this.asset = new Cash();
+        this.integralQuantity = 0;
+    }
     public CashStack(Cash asset, @Nonnegative double quantity) {
         this.asset = asset;
         this.setQuantity(quantity);

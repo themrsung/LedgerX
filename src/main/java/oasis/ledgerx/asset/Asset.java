@@ -33,7 +33,7 @@ public interface Asset {
     /**
      * Gets the type of this asset
      */
-    @JsonProperty("type")
+    @JsonIgnore
     @Nonnull
     default AssetType getType() {
         return getMeta().getType();

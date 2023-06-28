@@ -1,8 +1,10 @@
 package oasis.ledgerx.classes;
 
 import oasis.ledgerx.actor.Actor;
+import oasis.ledgerx.actor.ActorType;
 import oasis.ledgerx.stack.asset.AssetStack;
 
+import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,5 +67,11 @@ public final class EconomicActor implements Actor, Serializable {
 
     private void cleanAssets() {
         assets.removeIf(a -> a.getQuantity() == 0);
+    }
+
+    @Nonnull
+    @Override
+    public ActorType getType() {
+        return ActorType.ACTOR;
     }
 }

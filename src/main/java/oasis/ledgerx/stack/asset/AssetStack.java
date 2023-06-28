@@ -110,7 +110,7 @@ public interface AssetStack {
     /**
      * Gets the symbol of this asset
      */
-    @JsonProperty("symbol")
+    @JsonIgnore
     @Nonnull
     default String getSymbol() {
         return getAsset().getSymbol();
@@ -127,7 +127,7 @@ public interface AssetStack {
     /**
      * Gets the type of asset this stack is holding
      */
-    @JsonProperty("assetType")
+    @JsonIgnore
     @Nonnull
     default AssetType getAssetType() {
         return getAsset().getType();

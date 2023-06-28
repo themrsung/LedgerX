@@ -1,5 +1,6 @@
 package oasis.ledgerx.asset.commodity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import oasis.ledgerx.asset.AssetMeta;
 import oasis.ledgerx.asset.AssetType;
 import oasis.ledgerx.asset.cash.Cash;
@@ -45,6 +46,7 @@ public final class CommodityMeta implements AssetMeta, Serializable {
 
     @Nonnull
     @Override
+    @JsonProperty("type")
     public AssetType getType() {
         return AssetType.COMMODITY;
     }

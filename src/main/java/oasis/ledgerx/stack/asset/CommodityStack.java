@@ -1,5 +1,6 @@
 package oasis.ledgerx.stack.asset;
 
+import oasis.ledgerx.asset.cash.Cash;
 import oasis.ledgerx.asset.commodity.Commodity;
 import oasis.ledgerx.asset.commodity.CommodityMeta;
 import oasis.ledgerx.asset.stock.Stock;
@@ -14,6 +15,10 @@ import java.io.Serializable;
  * Fungible and integral
  */
 public final class CommodityStack implements AssetStack, Serializable {
+    public CommodityStack() {
+        this.asset = new Commodity();
+        this.quantity = 0;
+    }
     public CommodityStack(Commodity asset, @Nonnegative long quantity) {
         this.asset = asset;
         this.quantity = quantity;
