@@ -2,6 +2,9 @@ package oasis.ledgerx.trading.market;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import oasis.ledgerx.classes.Market;
 import oasis.ledgerx.state.LedgerState;
 import oasis.ledgerx.trading.PriceProvider;
 import oasis.ledgerx.trading.order.Order;
@@ -14,6 +17,13 @@ import java.util.List;
 /**
  * A marketplace can accept and process orders
  */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Market.class, name = "MARKET")
+})
 public interface Marketplace extends PriceProvider {
     /**
      * Gets the minimum tick size of this marketplace

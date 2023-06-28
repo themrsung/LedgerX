@@ -2,9 +2,12 @@ package oasis.ledgerx.trading;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.asset.cash.Cash;
 import oasis.ledgerx.stack.asset.CashStack;
+import oasis.ledgerx.trading.market.Marketplace;
 
 import javax.annotation.Nonnull;
 
@@ -12,6 +15,13 @@ import javax.annotation.Nonnull;
  * An entity capable of providing fair prices to assets
  * Prices are used for exercising options
  */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Marketplace.class, name = "MARKET")
+})
 public interface PriceProvider {
     /**
      * Gets the asset of which price is provided for

@@ -42,24 +42,24 @@ public final class LedgerX extends JavaPlugin {
     public void onEnable() {
         this.state = LedgerXState.load();
 
-        Actor a = new EconomicActor();
-        getState().addActor(a);
-
-        a.addAsset(new StockStack(new Stock("TEST", new StockMeta()), 10));
-
-        Actor b = new EconomicActor();
-        getState().addActor(b);
-
-        b.addAsset(new CashStack(new Cash("CR", new CashMeta()), 300.2d));
-
-
-        Cash cash = new Cash("sdsd", new CashMeta());
-        Market m = new Market(new ArrayList<>(), cash, 1, new CashStack());
-
-        getState().addMarket(m);
-
-        OptionStack os = new OptionStack();
-        getState().addContract(os);
+//        Actor a = new EconomicActor();
+//        getState().addActor(a);
+//
+//        a.addAsset(new StockStack(new Stock("TEST", new StockMeta()), 10));
+//
+//        Actor b = new EconomicActor();
+//        getState().addActor(b);
+//
+//        b.addAsset(new CashStack(new Cash("CR", new CashMeta()), 300.2d));
+//
+//
+//        Cash cash = new Cash("sdsd", new CashMeta());
+//        Market m = new Market(new ArrayList<>(), cash, 1, new CashStack());
+//
+//        getState().addMarket(m);
+//
+//        OptionStack os = new OptionStack();
+//        getState().addContract(os);
 
         new AssetTransferHandler(this);
         new OptionExerciser(this);
