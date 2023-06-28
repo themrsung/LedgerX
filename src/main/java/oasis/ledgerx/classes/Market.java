@@ -1,6 +1,7 @@
 package oasis.ledgerx.classes;
 
 import oasis.ledgerx.asset.Asset;
+import oasis.ledgerx.asset.cash.Cash;
 import oasis.ledgerx.stack.asset.CashStack;
 import oasis.ledgerx.state.LedgerState;
 import oasis.ledgerx.trading.market.MarketTick;
@@ -17,6 +18,13 @@ import java.util.List;
  * Class of Marketplace
  */
 public final class Market implements Marketplace, Serializable {
+    public Market() {
+        this.orders = new ArrayList<>();
+        this.asset = null;
+        this.tickSize = 1;
+        this.price = new CashStack();
+    }
+
     public Market(List<Order> orders, Asset asset, double tickSize, CashStack price) {
         this.orders = orders;
         this.asset = asset;
@@ -217,11 +225,14 @@ public final class Market implements Marketplace, Serializable {
     }
 
     @Override
+    @Nonnull
     public Asset getAsset() {
+        assert asset != null;
         return asset.copy();
     }
 
     @Override
+    @Nonnull
     public CashStack getPrice() {
         return new CashStack(price);
     }

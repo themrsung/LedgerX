@@ -1,8 +1,10 @@
 package oasis.ledgerx.trading.market;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import oasis.ledgerx.state.LedgerState;
 import oasis.ledgerx.trading.PriceProvider;
 import oasis.ledgerx.trading.order.Order;
-import oasis.ledgerx.state.LedgerState;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -17,31 +19,37 @@ public interface Marketplace extends PriceProvider {
      * Gets the minimum tick size of this marketplace
      * All orders non-compliant will be cancelled
      */
+    @JsonProperty("tickSize")
     double getTickSize();
 
     /**
      * Gets a copied list of all unfulfilled orders
      */
+    @JsonProperty("orders")
     List<Order> getOrders();
 
     /**
      * Places a new order
      */
+    @JsonIgnore
     void placeOrder(@Nonnull Order order, @Nonnull LedgerState state);
 
     /**
      * Cancels an existing order
      */
+    @JsonIgnore
     void cancelOrder(@Nonnull Order order, @Nonnull LedgerState state);
 
     /**
      * Processes all orders
      */
+    @JsonIgnore
     void processOrders(LedgerState state);
 
     /**
      * Gets structured buy tick data sorted by price descending
      */
+    @JsonIgnore
     default List<MarketTick> getBidTicks() {
         List<MarketTick> ticks = new ArrayList<>();
 
@@ -70,6 +78,7 @@ public interface Marketplace extends PriceProvider {
     /**
      * Gets lowest bid
      */
+    @JsonIgnore
     @Nullable
     default MarketTick getLowestBid() {
         List<MarketTick> bids = getBidTicks();
@@ -79,6 +88,7 @@ public interface Marketplace extends PriceProvider {
     /**
      * Gets structured sell tick data sorted by price ascending
      */
+    @JsonIgnore
     default List<MarketTick> getAskTicks() {
         List<MarketTick> ticks = new ArrayList<>();
 
@@ -107,6 +117,7 @@ public interface Marketplace extends PriceProvider {
     /**
      * Gets highest ask
      */
+    @JsonIgnore
     @Nullable
     default MarketTick getHighestAsk() {
         List<MarketTick> asks = getAskTicks();

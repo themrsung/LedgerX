@@ -2,6 +2,7 @@ package oasis.ledgerx.contract.futures;
 
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.annotation.NonCash;
+import oasis.ledgerx.classes.EconomicActor;
 import oasis.ledgerx.contract.Contract;
 import oasis.ledgerx.contract.ContractType;
 import oasis.ledgerx.stack.asset.AssetStack;
@@ -12,6 +13,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public final class Futures implements Contract {
+    public Futures() {
+        this.symbol = "";
+        this.buyer = new EconomicActor();
+        this.seller = new EconomicActor();
+        this.delivery = null;
+        this.expiry = new DateTime();
+    }
+
     /**
      * Creates a new futures contract
      * @param symbol Unique symbol of this contract
@@ -71,6 +80,7 @@ public final class Futures implements Contract {
     @NonCash
     @Override
     public AssetStack getDelivery() {
+        assert delivery != null;
         return delivery;
     }
 

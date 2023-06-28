@@ -7,6 +7,10 @@ import javax.annotation.Nonnull;
 import java.io.Serializable;
 
 public final class OptionStack implements ContractStack, Serializable {
+    public OptionStack() {
+        this.contract = new Option();
+        this.quantity = 0L;
+    }
     public OptionStack(Option contract, long quantity) {
         this.contract = contract;
         this.quantity = quantity;

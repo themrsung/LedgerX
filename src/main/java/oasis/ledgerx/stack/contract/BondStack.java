@@ -6,6 +6,11 @@ import javax.annotation.Nonnull;
 import java.io.Serializable;
 
 public final class BondStack implements ContractStack, Serializable {
+    public BondStack() {
+        this.contract = new Bond();
+        this.quantity = 0L;
+    }
+
     public BondStack(Bond contract, long quantity) {
         this.contract = contract;
         this.quantity = quantity;

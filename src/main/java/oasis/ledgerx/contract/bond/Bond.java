@@ -1,6 +1,7 @@
 package oasis.ledgerx.contract.bond;
 
 import oasis.ledgerx.actor.Actor;
+import oasis.ledgerx.classes.EconomicActor;
 import oasis.ledgerx.contract.Contract;
 import oasis.ledgerx.contract.ContractType;
 import oasis.ledgerx.stack.asset.CashStack;
@@ -10,6 +11,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public final class Bond implements Contract {
+    public Bond() {
+        this.symbol = "";
+        this.buyer = new EconomicActor();
+        this.seller = new EconomicActor();
+        this.delivery = new CashStack();
+        this.expiry = new DateTime();
+    }
     public Bond(String symbol, Actor buyer, Actor seller, CashStack delivery, @Nullable DateTime expiry) {
         this.symbol = symbol;
         this.buyer = buyer;

@@ -1,6 +1,8 @@
 package oasis.ledgerx.contract.option;
 
 import oasis.ledgerx.actor.Actor;
+import oasis.ledgerx.classes.EconomicActor;
+import oasis.ledgerx.classes.Market;
 import oasis.ledgerx.trading.PriceProvider;
 import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.contract.Contract;
@@ -18,6 +20,18 @@ import javax.annotation.Nullable;
  * Perpetual options are not supported
  */
 public final class Option implements Contract {
+    public Option() {
+        this.symbol = "";
+        this.buyer = new EconomicActor();
+        this.seller = new EconomicActor();
+        this.delivery = null;
+        this.expiry = new DateTime();
+
+        this.optionType = null;
+        this.market = new Market();
+        this.exercisePrice = new CashStack();
+    }
+
     public Option(String symbol, Actor buyer, Actor seller, AssetStack delivery, @Nonnull DateTime expiry, OptionType optionType, PriceProvider market, CashStack exercisePrice) {
         this.symbol = symbol;
         this.buyer = buyer;
