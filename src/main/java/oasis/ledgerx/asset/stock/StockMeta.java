@@ -43,10 +43,4 @@ public final class StockMeta implements AssetMeta, Serializable {
     public double getFractionalQuantity() {
         return 0;
     }
-
-    @Nonnull
-    @Override
-    public AssetType getType() {
-        return AssetType.STOCK;
-    }
 }

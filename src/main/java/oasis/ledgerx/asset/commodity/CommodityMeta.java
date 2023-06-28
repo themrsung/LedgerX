@@ -43,11 +43,4 @@ public final class CommodityMeta implements AssetMeta, Serializable {
     public double getFractionalQuantity() {
         return 0;
     }
-
-    @Nonnull
-    @Override
-    @JsonProperty("type")
-    public AssetType getType() {
-        return AssetType.COMMODITY;
-    }
 }

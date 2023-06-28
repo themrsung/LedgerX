@@ -59,6 +59,15 @@ public final class Stock implements Asset, Serializable {
     }
 
     /**
+     * Gets type of this asset
+     */
+    @Nonnull
+    @Override
+    public AssetType getType() {
+        return AssetType.STOCK;
+    }
+
+    /**
      * Gets an identical copy of this asset
      */
     @Override

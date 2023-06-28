@@ -35,9 +35,7 @@ public interface Asset {
      */
     @JsonIgnore
     @Nonnull
-    default AssetType getType() {
-        return getMeta().getType();
-    }
+    AssetType getType();
 
     /**
      * Gets a copy of the metadata of this asset

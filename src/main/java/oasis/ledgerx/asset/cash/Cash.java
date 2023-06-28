@@ -3,6 +3,7 @@ package oasis.ledgerx.asset.cash;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import oasis.ledgerx.asset.Asset;
 import oasis.ledgerx.asset.AssetMeta;
+import oasis.ledgerx.asset.AssetType;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
@@ -61,6 +62,15 @@ public final class Cash implements Asset, Serializable {
     public void setMeta(@Nonnull AssetMeta meta) throws IllegalArgumentException {
         if (!(meta instanceof CashMeta)) throw new IllegalArgumentException();
         this.meta = (CashMeta) meta;
+    }
+
+    /**
+     * Gets type of this asset
+     */
+    @Nonnull
+    @Override
+    public AssetType getType() {
+        return AssetType.CASH;
     }
 
     /**

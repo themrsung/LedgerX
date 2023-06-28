@@ -1,5 +1,6 @@
 package oasis.ledgerx.contract.futures;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.annotation.NonCash;
 import oasis.ledgerx.classes.EconomicActor;
@@ -50,11 +51,16 @@ public final class Futures implements Contract {
         this.expiry = other.expiry;
     }
 
+    @JsonProperty("symbol")
     private final String symbol;
+    @JsonProperty("buyer")
     private final Actor buyer;
+    @JsonProperty("seller")
     private final Actor seller;
+    @JsonProperty("delivery")
     @NonCash
     private final AssetStack delivery;
+    @JsonProperty("expiry")
     @Nullable
     private final DateTime expiry;
 

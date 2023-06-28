@@ -58,7 +58,6 @@ public final class LedgerXState implements LedgerState {
                 return;
             }
         }
-
         contracts.add(contract);
     }
 

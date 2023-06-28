@@ -39,11 +39,4 @@ public final class CashMeta implements AssetMeta, Serializable {
         if (fractionQuantity <= 0d) throw new IllegalArgumentException();
         this.fractionQuantity = fractionQuantity;
     }
-
-    @Nonnull
-    @Override
-    @JsonProperty("type")
-    public AssetType getType() {
-        return AssetType.CASH;
-    }
 }

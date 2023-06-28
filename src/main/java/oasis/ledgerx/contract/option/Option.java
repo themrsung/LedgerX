@@ -1,5 +1,7 @@
 package oasis.ledgerx.contract.option;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import oasis.ledgerx.actor.Actor;
 import oasis.ledgerx.classes.EconomicActor;
 import oasis.ledgerx.classes.Market;
@@ -56,15 +58,23 @@ public final class Option implements Contract {
         this.exercisePrice = other.exercisePrice;
     }
 
+    @JsonProperty("symbol")
     private final String symbol;
+    @JsonProperty("buyer")
     private final Actor buyer;
+    @JsonProperty("seller")
     private final Actor seller;
+    @JsonProperty("delivery")
     private final AssetStack delivery;
+    @JsonProperty("expiry")
     @Nullable
     private final DateTime expiry;
 
+    @JsonProperty("optionType")
     private final OptionType optionType;
+    @JsonProperty("market")
     private final PriceProvider market;
+    @JsonProperty("exercisePrice")
     private final CashStack exercisePrice;
 
     @Nonnull
@@ -97,26 +107,32 @@ public final class Option implements Contract {
         return new DateTime(expiry);
     }
 
+    @JsonIgnore
     public OptionType getOptionType() {
         return optionType;
     }
 
+    @JsonIgnore
     public boolean isCall() {
         return getOptionType().isCall();
     }
 
+    @JsonIgnore
     public boolean isAmerican() {
         return getOptionType().isAmerican();
     }
 
+    @JsonIgnore
     public PriceProvider getMarket() {
         return market;
     }
 
+    @JsonIgnore
     public CashStack getExercisePrice() {
         return exercisePrice;
     }
 
+    @JsonIgnore
     public boolean isExercisable() throws DifferentCurrencyException {
         if (!exercisePrice.getSymbol().equalsIgnoreCase(market.getPrice().getSymbol())) {
             throw new DifferentCurrencyException();
@@ -134,6 +150,7 @@ public final class Option implements Contract {
 
     @Nonnull
     @Override
+    @JsonIgnore
     public ContractType getType() {
         return ContractType.OPTION;
     }

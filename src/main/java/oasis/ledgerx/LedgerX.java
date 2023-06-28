@@ -8,6 +8,8 @@ import oasis.ledgerx.asset.stock.StockMeta;
 import oasis.ledgerx.classes.EconomicActor;
 import oasis.ledgerx.classes.Market;
 import oasis.ledgerx.contract.bond.Bond;
+import oasis.ledgerx.contract.option.Option;
+import oasis.ledgerx.contract.option.OptionType;
 import oasis.ledgerx.listener.asset.AssetTransferHandler;
 import oasis.ledgerx.listener.contract.OptionExerciser;
 import oasis.ledgerx.stack.asset.CashStack;
@@ -22,6 +24,7 @@ import oasis.ledgerx.timer.io.LedgerAutoSaver;
 import oasis.ledgerx.timer.market.MarketTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
@@ -58,8 +61,11 @@ public final class LedgerX extends JavaPlugin {
 //
 //        getState().addMarket(m);
 //
-//        OptionStack os = new OptionStack();
+//        OptionStack os = new OptionStack(new Option("TEST", a, b, new CashStack(), new DateTime(), OptionType.AMERICAN_CALL,  m, new CashStack()), 10L);
 //        getState().addContract(os);
+//
+//        BondStack bs = new BondStack(new Bond(), 200L);
+//        getState().addContract(bs);
 
         new AssetTransferHandler(this);
         new OptionExerciser(this);

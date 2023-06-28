@@ -59,10 +59,20 @@ public final class Commodity implements Asset, Serializable {
     }
 
     /**
+     * Gets type of this asset
+     */
+    @Nonnull
+    @Override
+    public AssetType getType() {
+        return AssetType.COMMODITY;
+    }
+
+    /**
      * Gets an identical copy of this asset
      */
     @Override
     public Commodity copy() {
         return new Commodity(this);
     }
+
 }

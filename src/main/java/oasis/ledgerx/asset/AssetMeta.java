@@ -34,11 +34,4 @@ public interface AssetMeta {
     @JsonIgnore
     @Nonnegative
     double getFractionalQuantity();
-
-    /**
-     * Gets the type of thi sasset
-     */
-    @JsonIgnore
-    @Nonnull
-    AssetType getType();
 }
